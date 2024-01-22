@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${msg}"></h1>
+	<h1>........hello world.........</h1>
+	<h1>[[${msg}]]</h1>
+	<h1>${msg}</h1>
+	<!-- /*주석라인*/ -->
+</body>
+</html>

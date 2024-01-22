@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="setFragment(content)">
+	<div>
+		<h2>Sample Layout Header</h2>
+	</div>
+	
+	<!-- <div layout:fragment="content">
+		<p>Page Content here</p>
+	</div> -->
+		<p>Page Content here2</p>
+		<th:block th:replace="${content}"></th:block>
+	
+	<div>
+		<h2>Sample Layout footer</h2>
+	</div>
+	</div>
+</body>
+</html>

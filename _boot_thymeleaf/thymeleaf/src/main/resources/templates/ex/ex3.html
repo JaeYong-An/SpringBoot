@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<th:block th:replace="~{layout/layout::setFragment(~{this::content})}">
+	<th:block th:fragment="content">
+		<h3>ex3.html</h3>
+		<h3>[[${arr}]]</h3>
+	</th:block>
+</th:block>
+</body>
+</html>
