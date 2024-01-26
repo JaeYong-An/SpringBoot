@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.BoardVO;
+import com.example.demo.domain.PagingVO;
 import com.example.demo.repository.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> list() {
+	public List<BoardVO> list(PagingVO pgvo) {
 		// TODO Auto-generated method stub
-		return bm.list();
+		return bm.list(pgvo);
 	}
 
 	@Override
@@ -45,5 +46,11 @@ public class BoardServiceImpl implements BoardService{
 	public int remove(long bno) {
 		// TODO Auto-generated method stub
 		return bm.remove(bno);
+	}
+
+	@Override
+	public int getTotalCount(PagingVO pgvo) {
+		// TODO Auto-generated method stub
+		return bm.getTotalCount(pgvo);
 	}
 }

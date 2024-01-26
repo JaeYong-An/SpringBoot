@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.domain.BoardVO;
+import com.example.demo.domain.PagingVO;
+import com.example.demo.handler.PagingHandler;
 import com.example.demo.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 public class BoardController {
 
+//	private final logger log = LogFactory.getLogger(BoardController.class);
+	
 	private final BoardService bsv;
 	
 	@GetMapping("/register")
@@ -33,9 +37,15 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model m) {
-		List<BoardVO> list = bsv.list();
+	public void list(Model m, PagingVO pgvo) {
+		List<BoardVO> list = bsv.list(pgvo);
+		//totalCount
+		int totalCount = bsv.getTotalCount(pgvo);
+		//PagingHandler
+		PagingHandler ph = new PagingHandler(pgvo, totalCount);
 		m.addAttribute("list", list);
+		//PagingHandler 객체 보내기
+		m.addAttribute("ph", ph);
 	}
 	
 	@GetMapping({"/detail","/modify"})

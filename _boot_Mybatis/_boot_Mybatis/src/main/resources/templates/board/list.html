@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout :: setFragment(~{this::content})}">
 	<th:block th:fragment="content">
+	<div class="container">
 		<table class="table">
 		  <thead>
 		    <tr>
@@ -27,5 +28,54 @@
 		    </th:block>
 		  </tbody>
 		</table>
+		
+		<!-- 페이지네이션 라인 -->
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination .justify-content-center:">
+		  
+		    <li th:if="${ph.prev}" class="page-item">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1}, qty=${ph.pgvo.qty}, type=${ph.pgvo.type), keyword=${ph.pgvo.keyword}" aria-label="Previous">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		    
+		    <!-- th:classappend : 동적 클래스 추가 -->
+		    <li th:each="i: ${#numbers.sequence(ph.startPage,ph.endPage)}" class="page-item ${ph.pgvo.pageNo==i ? 'active' : ''}">
+		    	<a class="page-link" th:href="@{/board/list(pageNo=${i}, qty=${ph.pgvo.qty})}">
+		    		[[${i}]]
+		    	</a>
+		    </li>
+		    
+		    <li th:if="${ph.next}" class="page-item">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.endPage+1}, qty=${ph.pgvo.qty})}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
+	
+	<div class="container">
+	<form action="/board/list">
+		<div class="input-group mb-3">
+			<select class="form-select form-select-sm" name="type" aria-label="Example select with button addon">
+				<option th:selected="${ph.pgvo.type==null ? true:false}">choose....</option>
+				<option th:value="t" th:selected="${ph.pgvo.type=='t' ? true:false}">제목</option>
+				<option th:value="c" th:selected="${ph.pgvo.type=='c' ? true:false}">내용</option>
+				<option th:value="w" th:selected="${ph.pgvo.type=='w' ? true:false}">작성자</option>
+				<option th:value="tc" th:selected="${ph.pgvo.type=='tc' ? true:false}">제목&내용</option>
+				<option th:value="tw" th:selected="${ph.pgvo.type=='tw' ? true:false}">제목&작성자</option>
+				<option th:value="cw" th:selected="${ph.pgvo.type=='cw' ? true:false}">내용&작성자</option>
+				<option th:value="tcw" th:selected="${ph.pgvo.type=='tcw' ? true:false}">제목&내용&작성자</option>
+			</select>
+		  <input type="text" placeholder="keyword" name="keyword" th:value="${ph.pgvo.keyword}" aria-describedby="button-addon1">
+		  <input type="hidden" name="pageNo" th:value="1">
+		  <input type="hidden" name="qty" th:value="${ph.pgvo.qty}">
+		  <button class="btn btn-outline-secondary" type="submit" id="button-addon1">search<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					    [[${ph.totalCount }]]
+					</span>	</button>
+		</div>
+	</form>
+	</div>
 	</th:block>
 </th:block>

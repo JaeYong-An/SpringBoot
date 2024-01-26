@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout :: setFragment(~{this::content})}">
 	<th:block th:fragment="content">
+	<div class="container">
 	<form action="/board/modify" method="post">
 		<div class="mb-3">
 		  <label for="bno" class="form-label">번호</label>
@@ -25,5 +26,6 @@
 		</div>
 		<button type="submit" id="regBtn" class="btn btn-primary">수정</button>
 		</form>
+		</div>
 </th:block>
 </th:block>
