@@ -30,16 +30,16 @@
 		</table>
 		
 		<!-- 페이지네이션 라인 -->
-		<nav aria-label="Page navigation example">
+		<!-- <nav aria-label="Page navigation example">
 		  <ul class="pagination .justify-content-center:">
 		  
 		    <li th:if="${ph.prev}" class="page-item">
-		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1}, qty=${ph.pgvo.qty}, type=${ph.pgvo.type), keyword=${ph.pgvo.keyword}" aria-label="Previous">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1}, qty=${ph.pgvo.qty}" aria-label="Previous">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
 		    
-		    <!-- th:classappend : 동적 클래스 추가 -->
+		    th:classappend : 동적 클래스 추가
 		    <li th:each="i: ${#numbers.sequence(ph.startPage,ph.endPage)}" class="page-item ${ph.pgvo.pageNo==i ? 'active' : ''}">
 		    	<a class="page-link" th:href="@{/board/list(pageNo=${i}, qty=${ph.pgvo.qty})}">
 		    		[[${i}]]
@@ -52,7 +52,29 @@
 		      </a>
 		    </li>
 		  </ul>
-		</nav>
+		</nav> -->
+		<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li th:if="${ph.prev}"  class="page-item">
+      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1},qty=${ph.pgvo.qty},type=${ph.pgvo.type},keyword=${ph.pgvo.keyword})}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <!-- th:classappend : 동적 클래스 추가 -->
+    <th:block th:each="i: ${#numbers.sequence(ph.startPage,ph.endPage)}">
+	    <li class="page-item" th:classappend="${ph.pgvo.pageNo == i ?'active':''}" aria-current="page">
+	    	<a class="page-link" th:href="@{/board/list(pageNo=${i},qty=${ph.pgvo.qty},type=${ph.pgvo.type},keyword=${ph.pgvo.keyword})}">[[${i}]]</a>
+	    </li>
+    
+    </th:block>
+   
+    <li th:if="${ph.next}" class="page-item">
+      <a class="page-link" th:href="@{/board/list(pageNo=${ph.endPage+1},qty=${ph.pgvo.qty},type=${ph.pgvo.type},keyword=${ph.pgvo.keyword})}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 	</div>
 	
 	<div class="container">

@@ -8,6 +8,11 @@
   		insert into board(title, writer, content) values(#{title}, #{writer}, #{content})
   	</insert>
   
+  	<select id="getBno" resultType="long">
+		select max(bno) from board
+	</select>
+  
+  	
   	<select id="list" resultType="com.example.demo.domain.BoardVO">
   		select * from board <include refid="search"/> order by bno desc limit #{pageStart},#{qty}
   	</select>

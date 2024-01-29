@@ -6,23 +6,23 @@
 	<form action="/board/modify" method="post">
 		<div class="mb-3">
 		  <label for="bno" class="form-label">번호</label>
-		  <input type="text" name="bno" class="form-control" id="bno" th:value="${bvo.bno }" readonly="readonly">
+		  <input type="text" name="bno" class="form-control" id="bno" th:value="${bdto.bvo.bno }" readonly="readonly">
 		</div>
 		<div class="mb-3">
 		  <label for="title" class="form-label">제목</label>
-		  <input type="text" name="title" class="form-control" th:value="${bvo.title }" id="title">
+		  <input type="text" name="title" class="form-control" th:value="${bdto.bvo.title }" id="title">
 		</div>
 		<div class="mb-3">
 		  <label for="writer" class="form-label">글쓴이</label>
-		  <input type="text" name="writer" class="form-control" id="writer" th:value="${bvo.writer }" readonly="readonly">
+		  <input type="text" name="writer" class="form-control" id="writer" th:value="${bdto.bvo.writer }" readonly="readonly">
 		</div>
 		<div class="mb-3">
 		  <label for="regAt" class="form-label">작성일</label>
-		  <input type="text" name="regAt" class="form-control" id="regAt" th:value="${bvo.regAt }" readonly="readonly">
+		  <input type="text" name="regAt" class="form-control" id="regAt" th:value="${bdto.bvo.regAt }" readonly="readonly">
 		</div>
 		<div class="mb-3">
 		  <label for="content" class="form-label">내용</label>
-		  <textarea class="form-control" name="content" id="content" rows="3">[[${bvo.content }]]</textarea>
+		  <textarea class="form-control" name="content" id="content" rows="3">[[${bdto.bvo.content }]]</textarea>
 		</div>
 		<button type="submit" id="regBtn" class="btn btn-primary">수정</button>
 		</form>

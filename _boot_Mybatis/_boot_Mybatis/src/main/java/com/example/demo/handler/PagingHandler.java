@@ -1,5 +1,8 @@
 package com.example.demo.handler;
 
+import java.util.List;
+
+import com.example.demo.domain.CommentVO;
 import com.example.demo.domain.PagingVO;
 
 import lombok.Getter;
@@ -12,6 +15,8 @@ public class PagingHandler {
 	private int startPage, endPage, totalCount;
 	private boolean prev, next;
 	private PagingVO pgvo;
+	
+	private List<CommentVO> cmtList;
 	
 	public PagingHandler(PagingVO pgvo, int totalCount) {
 		this.pgvo = pgvo;
@@ -27,5 +32,10 @@ public class PagingHandler {
 		}
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEndPage;
+	}
+	
+	public PagingHandler(PagingVO pgvo, int totalCount, List<CommentVO> cmtList) {
+		this(pgvo, totalCount);
+		this.cmtList = cmtList;
 	}
 }

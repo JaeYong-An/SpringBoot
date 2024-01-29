@@ -5,26 +5,43 @@
 	<div class="container">
 <table class="table table-bordered border-primary">
 <tr>
-<th>제목</th><td>[[${bvo.title }]]</td>
+<th>제목</th><td>[[${bdto.bvo.title }]]</td>
 </tr>
 <tr>
-<th>글쓴이</th><td>[[${bvo.writer }]]</td>
+<th>글쓴이</th><td>[[${bdto.bvo.writer }]]</td>
 </tr>
 <tr>
-<th>작성일</th><td>[[${bvo.regAt }]]</td>
+<th>작성일</th><td>[[${bdto.bvo.regAt }]]</td>
 </tr>
 <tr>
-<th>수정일</th><td>[[${bvo.modAt }]]</td>
+<th>수정일</th><td>[[${bdto.bvo.modAt }]]</td>
 </tr>
 <tr>
-<th>내용</th><td>[[${bvo.content }]]</td>
+<th>내용</th><td>[[${bdto.bvo.content }]]</td>
 </tr>
 </table>
+<div class="mb-3">
+	<ul class="list-group list-group-flush">
+	  <li th:each="fvo:${bdto.flist}" class="list-group-item">
+		  <div th:if="${fvo.fileType>0}" class="ms-2 me-auto">writer
+		  	<img th:src="@{|/upload/${fvo.saveDir}/${fvo.uuid}_th_${fvo.fileName}|}">
+		  </div>
+		  <div th:unless="${fvo.fileType>0}" class="ms-2 me-auto">
+		  <img>
+		  </div>
+		  <div class="ms-2 me-auto">
+		  	<div class="fw-bold">[[${fvo.fileName}]]</div>
+		  	[[${fvo.regAt}]]
+		  </div>
+	  	<span class="badge bg-dark rounded-pill">[[${fvo.fileSize}]]</span>
+	  </li>
+	</ul>
+</div>
 <form action="/board/romove" method="post" id="delForm" style="display:none;">
-	<input type="hidden" name="bno" th:value="${bvo.bno}">
+	<input type="hidden" name="bno" th:value="${bdto.bvo.bno}">
 </form>
-<a th:href="@{/board/modify(bno=${bvo.bno })}"><button type="button" class="btn btn-primary">수정</button></a>
-<a th:href="@{/board/remove(bno=${bvo.bno })}"><button type="button" class="btn btn-primary">삭제</button></a>
+<a th:href="@{/board/modify(bno=${bdto.bvo.bno })}"><button type="button" class="btn btn-primary">수정</button></a>
+<a th:href="@{/board/remove(bno=${bdto.bvo.bno })}"><button type="button" class="btn btn-primary">삭제</button></a>
 </div>
 <!-- 코멘트 라인 -->
 <!-- 등록 -->
@@ -42,9 +59,32 @@
 	  	<span>modAt</span>
 	  </li>
 	</ul>
+	<div class="col d-grid">
+		<button type="button" id="moreBtn" data-page="1" class="btn btn-outline-secondary btn-block" style="visibility:hidden">more+</button>
+	</div>
+	<!-- modal line -->
+	<div class="modal" id="myModal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Anonymous</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      <div class="input">
+	      	<input id="cmtTextMod">
+	      </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" id="cmtModBtn" class="btn btn-primary">저장</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
-<script>
-	const bnoVal = [[${bvo.bno}]];
+<script th:inline="javascript">
+	const bnoVal = [[${bdto.bvo.bno}]];
 </script>
 <script th:src="@{/js/boardComment.js}"></script>
 <script th:src="@{/js/boardDetail.js}"></script>
