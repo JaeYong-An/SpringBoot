@@ -68,8 +68,12 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO bvo) {
-		bsv.modify(bvo);
+	public String modify(BoardVO bvo, @RequestParam(name="files", required = false)MultipartFile[] files) {
+		List<FileVO> flist = null;
+		if(files[0].getSize()>0||files != null) {
+			flist = fh.uploadFiles(files);
+		}
+		bsv.modify(new BoardDTO(bvo,flist));
 		return "redirect:/board/detail?bno="+bvo.getBno();
 	}
 	

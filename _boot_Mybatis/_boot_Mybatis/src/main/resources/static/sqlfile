@@ -17,3 +17,20 @@ primary key(bno));
  reg_at datetime default now(),
  mod_at datetime default now(),
  primary key(cno));
+--------------------------------
+2024-01-30
+--------------------------------
+create table member(
+email varchar(200) not null,
+pwd varchar(256) not null,
+nick_name varchar(100) not null,
+reg_at datetime default now(),
+last_login datetime,
+primary key(email));
+
+create table auth_member(
+email varchar(200) not null,
+auth varchar(100) not null,
+foreign key (email) references member(email));
+
+alter table auth_member add constraint fk_auth foreign key(email) references member(email);

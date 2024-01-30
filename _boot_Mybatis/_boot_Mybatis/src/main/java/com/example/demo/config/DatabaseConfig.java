@@ -29,23 +29,23 @@ public class DatabaseConfig {
 	
 	@Bean
 	@ConfigurationProperties(prefix="spring.datasource")
-	public HikariConfig hikariConfig() {
+	HikariConfig hikariConfig() {
 		return new HikariConfig();
 	}
 	
 	@Bean
-	public org.apache.ibatis.session.Configuration mybatisConfig(){
+	org.apache.ibatis.session.Configuration mybatisConfig(){
 		return new org.apache.ibatis.session.Configuration();
 	}
 	
 	@Bean
-	public DataSource dataSource() throws Exception{
+	DataSource dataSource() throws Exception{
 		DataSource dataSource = new HikariDataSource(hikariConfig());
 		return dataSource;
 	}
 	
 	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+	SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		
@@ -56,7 +56,7 @@ public class DatabaseConfig {
 	}
 	
 	@Bean
-	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+	SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }

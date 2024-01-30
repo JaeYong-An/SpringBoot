@@ -14,7 +14,7 @@ public interface BoardService {
 
 	BoardDTO selectOne(long bno);
 
-	void modify(BoardVO bvo);
+	void modify(BoardDTO boardDTO);
 
 	int remove(long bno);
 

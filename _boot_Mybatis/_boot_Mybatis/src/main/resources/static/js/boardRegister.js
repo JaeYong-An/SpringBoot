@@ -36,7 +36,7 @@ document.addEventListener(`change`, (e)=>{
             //업로드 가능 여부 표시
             ul += `<div class="ms-2 me-auto">${validResult? `<div class="fw-bold">업로드 가능`:`<div class="fw-bold text-danger">업로드 불가능`}</div>`;
             ul += `${file.name}</div>`;
-            ul += `<span class="badge rounded-pill text-bg-${validResult? `primary`:`danger`}">${file.size}</span>`;
+            ul += `<span class="badge rounded-pill text-bg-${validResult? `primary`:`danger`}">${file.size}Byte</span>`;
             ul += `</li>`;
         }
         ul += `</ul>`;

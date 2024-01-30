@@ -53,10 +53,18 @@ public class BoardServiceImpl implements BoardService{
 		return bdto;
 	}
 
+	@Transactional
 	@Override
-	public void modify(BoardVO bvo) {
+	public void modify(BoardDTO bdto) {
 		// TODO Auto-generated method stub
-		bm.edit(bvo);
+		int isOK = bm.edit(bdto.getBvo());
+		if(isOK > 0 && bdto.getFlist().size()>0) {
+			long bno = bdto.getBvo().getBno();
+			for(FileVO fvo : bdto.getFlist()) {
+				fvo.setBno(bno);
+				isOK*=fm.insertFile(fvo);
+			}
+		}
 	}
 
 	@Override

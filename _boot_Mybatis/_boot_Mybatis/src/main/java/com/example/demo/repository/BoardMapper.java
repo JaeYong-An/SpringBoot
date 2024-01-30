@@ -17,7 +17,7 @@ public interface BoardMapper {
 
 	BoardVO selectOne(long bno);
 
-	void edit(BoardVO bvo);
+	int edit(BoardVO bvo);
 
 	int remove(long bno);
 
