@@ -22,5 +22,4 @@ public class CustomUserService implements UserDetailsService {
 		mvo.setAuthList(memberMapper.selectAuths(username));
 		return new AuthMember(mvo);
 	}
-
 }
