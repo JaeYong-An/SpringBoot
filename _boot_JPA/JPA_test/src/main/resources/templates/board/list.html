@@ -24,6 +24,32 @@
 		    </th:block>
 		  </tbody>
 		</table>
+		<!-- 페이지네이션 라인 -->
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination .justify-content-center:">
+		  
+		    <li th:if="${pageVo.hasPrev}" class="page-item">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${pageVo.startPage-1})}" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    
+		   <!--  th:classappend : 동적 클래스 추가 -->
+		   <th:block th:each="i: ${#numbers.sequence(pageVo.startPage,pageVo.endPage)}">
+		    <li class="page-item " th:classappend="${pageVo.pageNo==i ? 'active' : ''}">
+		    	<a class="page-link" th:href="@{/board/list(pageNo=${i})}">
+		    		[[${i}]]
+		    	</a>
+		    </li>
+		    </th:block>
+		    
+		    <li th:if="${pageVo.hasNext}" class="page-item">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${pageVo.endPage+1})}" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
 		</th:block>
 		</th:block>
 		</html>

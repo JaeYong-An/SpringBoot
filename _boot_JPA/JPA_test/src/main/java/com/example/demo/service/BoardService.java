@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.example.demo.dto.BoardDTO;
 import com.example.demo.entity.Board;
@@ -31,6 +31,14 @@ public interface BoardService {
 				.build();
 	}
 
-	List<BoardDTO> getList();
+//	List<BoardDTO> getList();
+	
+	Page<BoardDTO> getList(int page);
+
+	Long modify(BoardDTO bdto);
+
+	BoardDTO getDetail(Long bno);
+
+	void remove(Long bno);
 
 }

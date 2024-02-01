@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout :: setFragment(~{this::content})}">
+
+	<th:block th:fragment="content">
+
+		<div class="container-md">
+
+		
+
+			<br>			
+
+			<form action="/board/modify" method="post" id="modForm">
+
+				<div class="input-group mb-3">
+
+				  <span class="input-group-text" id="modAtSpan">ModAt</span>
+
+				  <input type="text" class="form-control" name="modAt" th:value="${bdto.modAt}" aria-label="title" aria-describedby="modAtSpan" readonly>
+
+				</div>
+
+				<div class="input-group mb-3">
+
+				  <span class="input-group-text" id="titleSpan">Title</span>
+
+				  <input type="text" class="form-control" id="title" name="title" th:value="${bdto.title}" aria-label="title" aria-describedby="titleSpan" readonly>
+
+				</div>
+
+				<div class="input-group mb-3">
+
+				  <span class="input-group-text" id="writerSpan">Writer</span>
+
+				  <input type="text" class="form-control" name="writer" th:value="${bdto.writer}" aria-label="writer" aria-describedby="writerSpan" readonly>
+
+				</div>
+
+				<div class="input-group">
+
+				  <span class="input-group-text">Content</span>
+
+				  <textarea class="form-control" id="content" name="content" aria-label="With textarea" readonly>[[${bdto.content}]]</textarea>
+
+				</div>
+
+				<br>
+
+				<div class="input-group" id="DivBtn">
+
+					<button type="button" class="btn btn-primary" id="listBtn">BoardList</button>					
+
+					<button type="button" class="btn btn-success" id="modBtn">Modify</button>
+
+					<button type="button" class="btn btn-danger" id="delBtn">Delete</button>
+
+				</div>
+
+				
+
+				<input type="hidden" name="bno" th:value="${bdto.bno}">
+
+			</form>
+
+			<hr>
+			<form action="/board/remove" method="post" id="delForm">
+			<input type="hidden" name="bno" th:value="${bdto.bno}">
+			</form>
+			
+
+			<script type="text/javascript" th:src="@{/js/board_detail.js}"></script>
+
+		
+
+		</div> <!-- class="container-md" -->
+
+	</th:block> <!--/* th:fragment */-->
+
+</th:block> <!--/* th:replace */-->
