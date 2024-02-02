@@ -41,8 +41,9 @@
 		    		[[${i}]]
 		    	</a>
 		    </li>
-		    </th:block>
 		    
+		    </th:block>
+		      
 		    <li th:if="${pageVo.hasNext}" class="page-item">
 		      <a class="page-link" th:href="@{/board/list(pageNo=${pageVo.endPage+1})}" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
